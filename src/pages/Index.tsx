@@ -38,7 +38,7 @@ const Index = () => {
 
   // Profile data - pode ser personalizado depois
   const profile = {
-    name: "Gostaríamos de expressar nosso mais profundo agradecimento por terem compartilhado conosco um dos momentos mais especiais das nossas vidas.\n\nA presença de cada um de vocês tornou o nosso casamento ainda mais inesquecível. Sentir o carinho, o amor e a energia de todos foi um presente que levaremos para sempre no coração.\n\nObrigado por celebrarem conosco esse início de nova fase. Que possamos seguir cultivando essa conexão e vivendo muitos outros momentos felizes juntos!\n\nCom todo o nosso carinho,\nNatalia & Daniel\n\n💍 17.10.2025",
+    name: "Gostaríamos de expressar nosso mais profundo agradecimento por terem compartilhado conosco um dos momentos mais especiais das nossas vidas.\n\nA presença de cada um de vocês tornou o nosso casamento ainda mais inesquecível. Sentir o carinho, o amor e a energia de todos foi um presente que levaremos para sempre no coração.\n\nObrigado por celebrarem conosco esse início de nova fase. Que possamos seguir cultivando essa conexão e vivendo muitos outros momentos felizes juntos!\n\nCom todo o nosso carinho,\nNatalia & Daniel\n\n💍 17.10.2025\n\n",
     bio: "",
     avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
   };
@@ -181,7 +181,7 @@ const Index = () => {
           </div>
         )}
       
-      <div className="w-full max-w-md mx-auto px-4 py-6 pb-8 sm:py-12">
+      <div className="w-full max-w-md mx-auto px-4 pb-8 mt-auto" style={{ marginTop: '60vh' }}>
         <ProfileSection 
           name={profile.name} 
           bio={profile.bio}

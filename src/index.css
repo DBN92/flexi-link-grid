@@ -142,15 +142,59 @@ All colors MUST be HSL.
   }
 
   .animate-scroll {
-    animation: scroll 60s linear infinite;
+    animation: scroll 30s linear infinite;
+  }
+
+  .animate-scroll-3lines {
+    animation: scroll-3lines 20s ease-in-out infinite;
   }
 }
 
 @keyframes scroll {
+  0% {
+    transform: translateY(0%);
+  }
+  25% {
+    transform: translateY(-25%);
+  }
+  50% {
+    transform: translateY(-50%);
+  }
+  75% {
+    transform: translateY(-25%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes scroll-3lines {
+  0%, 15% {
+    transform: translateY(0%);
+  }
+  25%, 40% {
+    transform: translateY(-33.33%);
+  }
+  50%, 65% {
+    transform: translateY(-66.66%);
+  }
+  75%, 90% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes scroll-4lines {
   0% {
     transform: translateY(100%);
   }
   100% {
     transform: translateY(-100%);
   }
+}
+
+.animate-scroll-4lines {
+  animation: scroll-4lines 75s linear infinite;
 }
