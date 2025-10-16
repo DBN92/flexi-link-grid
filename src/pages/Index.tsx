@@ -26,7 +26,7 @@ const Index = () => {
     { 
       id: 2, 
       title: "Sapatinho/Gravata via Cartão", 
-      url: "https://link-pagamento-cartao.com",
+      url: "https://checkout.infinitepay.io/danielbezerra?items=[{\"name\":\"Sapatinho/Gravata\",\"price\":5000,\"quantity\":1}]&order_nsu=sapatinho_gravata_001&redirect_url=https://flexi-link-grid.vercel.app/",
       type: "payment" as const
     },
   ];
