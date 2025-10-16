@@ -185,13 +185,14 @@ All colors MUST be HSL.
 
 @keyframes scroll-4lines {
   0% {
-    transform: translateY(100%);
+    transform: translateY(0%);
   }
   100% {
-    transform: translateY(-100%);
+    transform: translateY(-200%);
   }
 }
 
 .animate-scroll-4lines {
   animation: scroll-4lines 75s linear infinite;
+  animation-delay: 3s;
 }

@@ -181,7 +181,7 @@ const Index = () => {
           </div>
         )}
       
-      <div className="w-full max-w-md mx-auto px-4 pb-8 mt-auto" style={{ marginTop: '60vh' }}>
+      <div className="w-full max-w-md mx-auto px-4 pb-8 mt-auto" style={{ marginTop: '40vh' }}>
         <ProfileSection 
           name={profile.name} 
           bio={profile.bio}
