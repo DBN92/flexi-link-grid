@@ -141,9 +141,6 @@ All colors MUST be HSL.
     transition: var(--transition-smooth);
   }
 
-  .animate-scroll {
-    animation: scroll 30s linear infinite;
-  }
 
   .animate-scroll-3lines {
     animation: scroll-3lines 20s ease-in-out infinite;
