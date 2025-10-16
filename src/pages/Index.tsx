@@ -67,7 +67,7 @@ const Index = () => {
       redirectUrl = `${redirectUrl}/`;
     }
     
-    return `https://checkout.infinitepay.io/?handle=danielbn92&items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=${encodeURIComponent(redirectUrl)}`;
+    return `https://www.infinitepay.io/checkout-externo?handle=danielbn92&items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=${encodeURIComponent(redirectUrl)}`;
   };
 
   // Função para lidar com o pagamento customizado
