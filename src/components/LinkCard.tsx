@@ -58,10 +58,10 @@ export const LinkCard = forwardRef<HTMLButtonElement, LinkCardProps>(({
     <Button
       ref={ref}
       variant={variant}
-      className="w-full h-16 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm bg-white/20 border-2 border-white/30 text-white hover:bg-white/30 rounded-2xl group"
+      className="w-full h-14 sm:h-16 text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm bg-white/20 border-2 border-white/30 text-white hover:bg-white/30 rounded-xl sm:rounded-2xl group"
       onClick={handleClick}
     >
-      <span className="flex-1 group-hover:text-pink-100 transition-colors">{title}</span>
+      <span className="flex-1 group-hover:text-pink-100 transition-colors px-2">{title}</span>
       <div className="transition-transform group-hover:scale-110">
         {getIcon()}
       </div>

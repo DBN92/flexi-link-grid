@@ -67,7 +67,7 @@ const Index = () => {
       redirectUrl = `${redirectUrl}/`;
     }
     
-    return `https://www.infinitepay.io/checkout-externo?handle=danielbn92&items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=${encodeURIComponent(redirectUrl)}`;
+    return `https://checkout.infinitepay.io/danielbn92?items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=${encodeURIComponent(redirectUrl)}`;
   };
 
   // Função para lidar com o pagamento customizado
@@ -146,7 +146,8 @@ const Index = () => {
         backgroundImage: "url('/couple-background.JPG')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed"
       };
     }
     return {};
@@ -154,7 +155,7 @@ const Index = () => {
 
   return (
     <div
-      className={`min-h-screen py-12 px-4 relative ${getBackgroundStyle()} flex items-end`}
+      className={`min-h-screen min-h-[100dvh] w-full relative ${getBackgroundStyle()} flex items-end`}
       style={getBackgroundColor()}
     >
       {/* Overlay for better readability */}
@@ -163,30 +164,30 @@ const Index = () => {
       )}
       
       {/* Mensagem de agradecimento pós-pagamento */}
-      {showThankYouMessage && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300">
-            <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Pagamento Confirmado!
-            </h2>
-            <p className="text-lg text-gray-600 mb-2">
-              Muito obrigado pela colaboração ;)
-            </p>
-            <p className="text-sm text-gray-500">
-              Sua contribuição significa muito para nós! ❤️
-            </p>
+        {showThankYouMessage && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg p-6 sm:p-8 max-w-sm sm:max-w-md w-full text-center shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300">
+              <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">🎉</div>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
+                Pagamento Confirmado!
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600 mb-2">
+                Muito obrigado pela colaboração ;)
+              </p>
+              <p className="text-sm text-gray-500">
+                Sua contribuição significa muito para nós! ❤️
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
       
-      <div className="w-full max-w-md mx-auto px-4">
+      <div className="w-full max-w-md mx-auto px-4 py-6 pb-8 sm:py-12">
         <ProfileSection 
           name={profile.name} 
           bio={profile.bio}
         />
         
-        <div className="mt-8 space-y-4">
+        <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
           {links.map((link, index) => (
             <div key={index}>
               {link.type === "custom-payment" ? (
