@@ -21,7 +21,7 @@ const Index = () => {
       title: "💰 PIX - Copia e Cola", 
       url: "pix-copy", // URL especial para indicar ação de cópia
       type: "pix" as const,
-      pixCode: "00020126360014BR.GOV.BCB.PIX0118bdeae09c-ba7f-4218-8ae8-71add8cf26c952040000530398654061.005802BR5920Chave Aleatória Teste6009Sao Paulo62100506PAGTO6304B5A2"
+      pixCode: "00020101021126580014BR.GOV.BCB.PIX0136bdeae09c-ba7f-4218-8ae8-71add8cf26c95204000053039865802BR5925DANIEL BEZERRA DO NASCIME6008SAOPAULO61080132305062070503***630455F2"
     },
     { 
       id: 2, 
