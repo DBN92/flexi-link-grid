@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LinkCard } from "@/components/LinkCard";
 import { ProfileSection } from "@/components/ProfileSection";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,29 @@ const Index = () => {
   const [linkVariant, setLinkVariant] = useState<"gradient" | "outline" | "glass">("outline");
   const [customAmount, setCustomAmount] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [showThankYouMessage, setShowThankYouMessage] = useState(false);
+
+  // Detectar retorno do pagamento
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentStatus = urlParams.get('payment_status');
+    const orderNsu = urlParams.get('order_nsu');
+    
+    // Se há parâmetros de pagamento na URL, mostrar mensagem de agradecimento
+    if (paymentStatus || orderNsu?.includes('sapatinho_gravata_')) {
+      setShowThankYouMessage(true);
+      
+      // Limpar a URL após 3 segundos
+      setTimeout(() => {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }, 3000);
+      
+      // Esconder mensagem após 8 segundos
+      setTimeout(() => {
+        setShowThankYouMessage(false);
+      }, 8000);
+    }
+  }, []);
 
   // Profile data - pode ser personalizado depois
   const profile = {
@@ -29,7 +52,22 @@ const Index = () => {
       "quantity": 1
     }]));
     
-    return `https://checkout.infinitepay.io/danielbn92?items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=https://flexi-link-grid.vercel.app/`;
+    // URL de redirecionamento inteligente baseada no ambiente
+    let redirectUrl = window.location.origin;
+    
+    // Detectar ambiente e configurar URL apropriada
+    if (redirectUrl.includes('localhost') || redirectUrl.includes('127.0.0.1')) {
+      // Desenvolvimento local - simular retorno do pagamento
+      redirectUrl = `${redirectUrl}/?payment_status=success&order_nsu=sapatinho_gravata_${Date.now()}`;
+    } else if (redirectUrl.includes('casamentond.danieltechsolutions.com')) {
+      // Produção - usar URL de produção
+      redirectUrl = 'https://casamentond.danieltechsolutions.com/';
+    } else {
+      // Outros ambientes (Vercel, etc.) - usar URL atual
+      redirectUrl = `${redirectUrl}/`;
+    }
+    
+    return `https://checkout.infinitepay.io/?handle=danielbn92&items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=${encodeURIComponent(redirectUrl)}`;
   };
 
   // Função para lidar com o pagamento customizado
@@ -122,6 +160,24 @@ const Index = () => {
       {/* Overlay for better readability */}
       {backgroundType === "image" && (
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50 pointer-events-none" />
+      )}
+      
+      {/* Mensagem de agradecimento pós-pagamento */}
+      {showThankYouMessage && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300">
+            <div className="text-6xl mb-4">🎉</div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Pagamento Confirmado!
+            </h2>
+            <p className="text-lg text-gray-600 mb-2">
+              Muito obrigado pela colaboração ;)
+            </p>
+            <p className="text-sm text-gray-500">
+              Sua contribuição significa muito para nós! ❤️
+            </p>
+          </div>
+        </div>
       )}
       
       <div className="w-full max-w-md mx-auto px-4">
