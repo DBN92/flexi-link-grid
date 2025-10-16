@@ -57,6 +57,14 @@ export const CustomizationPanel = ({
             >
               Cor Sólida
             </Button>
+            <Button
+              variant={backgroundType === "image" ? "default" : "outline"}
+              size="sm"
+              onClick={() => onBackgroundTypeChange("image")}
+            >
+              <ImageIcon className="w-4 h-4 mr-1" />
+              Imagem
+            </Button>
           </div>
 
           {backgroundType === "gradient" && (

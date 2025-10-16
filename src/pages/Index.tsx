@@ -1,42 +1,41 @@
 import { useState } from "react";
-import { Settings } from "lucide-react";
 import { LinkCard } from "@/components/LinkCard";
 import { ProfileSection } from "@/components/ProfileSection";
-import { CustomizationPanel } from "@/components/CustomizationPanel";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 const Index = () => {
-  const [backgroundType, setBackgroundType] = useState("gradient");
+  const [backgroundType, setBackgroundType] = useState("image");
   const [backgroundColor, setBackgroundColor] = useState("gradient-primary");
   const [linkVariant, setLinkVariant] = useState<"gradient" | "outline" | "glass">("outline");
 
   // Profile data - pode ser personalizado depois
   const profile = {
-    name: "Seu Nome",
-    bio: "Criador de conteúdo • Designer • Desenvolvedor",
+    name: "Gostaríamos de expressar nosso mais profundo agradecimento por terem compartilhado conosco um dos momentos mais especiais das nossas vidas.\n\nA presença de cada um de vocês tornou o nosso casamento ainda mais inesquecível. Sentir o carinho, o amor e a energia de todos foi um presente que levaremos para sempre no coração.\n\nObrigado por celebrarem conosco esse início de nova fase. Que possamos seguir cultivando essa conexão e vivendo muitos outros momentos felizes juntos!\n\nCom todo o nosso carinho,\nNatalia & Daniel\n\n💍 17.10.2025",
+    bio: "",
     avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
   };
 
-  // Links - pode ser personalizado depois
+  // Links - apenas PIX e Cartão de Crédito
   const links = [
-    { id: 1, title: "📱 Instagram", url: "https://instagram.com" },
-    { id: 2, title: "🐦 Twitter", url: "https://twitter.com" },
-    { id: 3, title: "💼 LinkedIn", url: "https://linkedin.com" },
-    { id: 4, title: "🎵 Spotify", url: "https://spotify.com" },
-    { id: 5, title: "🎥 YouTube", url: "https://youtube.com" },
+    { 
+      id: 1, 
+      title: "💰 PIX - Copia e Cola", 
+      url: "pix-copy", // URL especial para indicar ação de cópia
+      type: "pix" as const,
+      pixCode: "00020126360014BR.GOV.BCB.PIX0118bdeae09c-ba7f-4218-8ae8-71add8cf26c952040000530398654061.005802BR5920Chave Aleatória Teste6009Sao Paulo62100506PAGTO6304B5A2"
+    },
+    { 
+      id: 2, 
+      title: "Sapatinho/Gravata via Cartão", 
+      url: "https://link-pagamento-cartao.com",
+      type: "payment" as const
+    },
   ];
 
   const getBackgroundStyle = () => {
     if (backgroundType === "gradient") {
       return backgroundColor;
+    } else if (backgroundType === "image") {
+      return "bg-cover bg-center bg-no-repeat";
     }
     return "";
   };
@@ -44,66 +43,37 @@ const Index = () => {
   const getBackgroundColor = () => {
     if (backgroundType === "solid") {
       return { backgroundColor };
+    } else if (backgroundType === "image") {
+      return { 
+        backgroundImage: "url('/couple-background.JPG')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat"
+      };
     }
     return {};
   };
 
   return (
     <div
-      className={`min-h-screen py-12 px-4 ${getBackgroundStyle()}`}
+      className={`min-h-screen py-12 px-4 relative ${getBackgroundStyle()} flex items-end`}
       style={getBackgroundColor()}
     >
-      <div className="max-w-2xl mx-auto">
-        <div className="flex justify-end mb-6">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="glass" size="icon" className="shadow-glow">
-                <Settings className="w-5 h-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Personalização</SheetTitle>
-                <SheetDescription>
-                  Customize o visual do seu Linktree
-                </SheetDescription>
-              </SheetHeader>
-              <div className="mt-6">
-                <CustomizationPanel
-                  backgroundType={backgroundType}
-                  backgroundColor={backgroundColor}
-                  linkVariant={linkVariant}
-                  onBackgroundTypeChange={setBackgroundType}
-                  onBackgroundColorChange={setBackgroundColor}
-                  onLinkVariantChange={setLinkVariant}
-                />
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        <div className="space-y-8">
-          <ProfileSection
-            name={profile.name}
-            bio={profile.bio}
-            avatarUrl={profile.avatarUrl}
-          />
-
-          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
-            {links.map((link, index) => (
-              <div
-                key={link.id}
-                className="animate-in fade-in slide-in-from-bottom-4"
-                style={{ animationDelay: `${index * 100 + 300}ms` }}
-              >
-                <LinkCard
-                  title={link.title}
-                  url={link.url}
-                  variant={linkVariant}
-                />
-              </div>
-            ))}
-          </div>
+      {/* Overlay for better readability */}
+      {backgroundType === "image" && (
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50 pointer-events-none" />
+      )}
+      
+      <div className="w-full max-w-md mx-auto px-4">
+        <ProfileSection 
+          name={profile.name} 
+          bio={profile.bio}
+        />
+        
+        <div className="mt-8 space-y-4">
+          {links.map((link, index) => (
+            <LinkCard key={index} {...link} />
+          ))}
         </div>
       </div>
     </div>
