@@ -29,7 +29,7 @@ const Index = () => {
       "quantity": 1
     }]));
     
-    return `https://checkout.infinitepay.io/danielbezerra?items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=https://flexi-link-grid.vercel.app/`;
+    return `https://checkout.infinitepay.io/$danielbn92?items=${items}&order_nsu=sapatinho_gravata_${Date.now()}&redirect_url=https://flexi-link-grid.vercel.app/`;
   };
 
   // Função para lidar com o pagamento customizado
