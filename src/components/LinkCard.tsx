@@ -1,23 +1,25 @@
 import { ExternalLink, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 interface LinkCardProps {
   title: string;
   url: string;
   variant?: "gradient" | "outline" | "glass";
-  type?: "pix" | "payment";
+  type?: "pix" | "payment" | "custom-payment";
   pixCode?: string;
+  onCustomPayment?: () => void;
 }
 
-export const LinkCard = ({ 
+export const LinkCard = forwardRef<HTMLButtonElement, LinkCardProps>(({ 
   title, 
   url, 
   variant = "outline", 
   type = "payment",
-  pixCode 
-}: LinkCardProps) => {
+  pixCode,
+  onCustomPayment
+}, ref) => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
@@ -38,6 +40,8 @@ export const LinkCard = ({
           variant: "destructive",
         });
       }
+    } else if (type === "custom-payment" && onCustomPayment) {
+      onCustomPayment();
     } else {
       window.open(url, "_blank", "noopener,noreferrer");
     }
@@ -52,6 +56,7 @@ export const LinkCard = ({
 
   return (
     <Button
+      ref={ref}
       variant={variant}
       className="w-full h-16 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm bg-white/20 border-2 border-white/30 text-white hover:bg-white/30 rounded-2xl group"
       onClick={handleClick}
@@ -62,4 +67,4 @@ export const LinkCard = ({
       </div>
     </Button>
   );
-};
+});
